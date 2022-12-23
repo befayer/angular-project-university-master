@@ -1,0 +1,34 @@
+<div id="app" class="wrapper">
+  <mat-toolbar color="primary" class="navbar">
+  <span>
+    <a href="/" class="univ-link">CardSaver</a>
+  </span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Главная</a>
+    <div *ngIf="isLoggedIn">
+      <a mat-button routerLink="/bank" routerLinkActive="active">Банки</a>
+      <a mat-button routerLink="/client" routerLinkActive="active">Клиенты</a>
+      <a mat-button routerLink="/document-type" routerLinkActive="active">Типы документов</a>
+      <a mat-button routerLink="/document" routerLinkActive="active">Документы</a>
+      <a mat-button routerLink="/currency" routerLinkActive="active">Валюты</a>
+      <a mat-button routerLink="/account" routerLinkActive="active">Счета</a>
+      <a mat-button routerLink="/card" routerLinkActive="active">Карты</a>
+    </div>
+    <div *ngIf="!isLoggedIn">
+      <a mat-button routerLink="/login" routerLinkActive="active">Логин</a>
+      <a mat-button routerLink="/register" routerLinkActive="active">Регистрация</a>
+    </div>
+    <div *ngIf="isLoggedIn">
+      <a mat-button routerLink="/profile" routerLinkActive="active">Профиль</a>
+      <a mat-button href (click)="logout()" routerLinkActive="active">Выйти</a>
+    </div>
+  </mat-toolbar>
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+  <mat-toolbar color="primary" class="footer">
+    <div class="container d-flex align-items-center justify-content-center">
+      ©2022 CardSaver
+    </div>
+  </mat-toolbar>
+</div>

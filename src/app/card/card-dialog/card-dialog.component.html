@@ -1,0 +1,59 @@
+<h1 mat-dialog-title>{{actionBtn}} запись</h1>
+<div mat-dialog-content>
+  <form #f="ngForm" [formGroup]="form" autocomplete="off">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Счет</mat-label>
+      <mat-select formControlName="clientId">
+        <mat-option></mat-option>
+        <mat-option *ngFor="let account of accounts" [value]="account.id">
+          {{account.id}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Начало действия</mat-label>
+      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dateStart">
+      <mat-hint>ДД/ММ/ГГГГ</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.controls['dateStart'].errors?.['required']">Заполнение обязательно!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Конец действия</mat-label>
+      <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dateEnd">
+      <mat-hint>ДД/ММ/ГГГГ</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.controls['dateEnd'].errors?.['required']">Заполнение обязательно!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>CVC</mat-label>
+      <input matInput type="number" formControlName="cvc" placeholder="Поле ввода...">
+      <mat-error *ngIf="form.controls['cvc'].errors?.['required']">Заполнение обязательно!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Баланс</mat-label>
+      <input matInput type="number" formControlName="balance" placeholder="Поле ввода...">
+      <mat-error *ngIf="form.controls['balance'].errors?.['required']">Заполнение обязательно!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Активность</mat-label>
+      <mat-select formControlName="status">
+        <mat-option></mat-option>
+        <mat-option value="true">Да</mat-option>
+        <mat-option value="false">Нет</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" (click)="onClose()" mat-dialog-close>Закрыть</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">{{actionBtn}}</button>
+</div>
